@@ -12,65 +12,68 @@ import math
 
 
 
-
-position = (0,0)
-search_radius = 150
-angle_initial = 0 #en degrees
-a = 150 #coté
-liste_position= [position]
-liste_etat = [([1,angle_initial],[3,angle_initial+120],[2,angle_initial+240])]
-waypoints,x,y,center_x,center_y = waypoint.waypoints_circle()
-current_waypoint, index_current_waypoint = search_funcs.search_next_waypoint(position, 0, waypoints, search_radius)
+""" parameters """
+starting_position = (0,0) #starting position of the robot ### A MODIFIER POUR LE DEFINIR EN FONCTION DU 1ER WAYPOINT
+tolerance = 0 #tolerance for the approximation of the trajectory
+initial_angle = 0 #en degrees
+side = 100 #side size of the triangles
+ 
+""" initialization """
+## calculation of the searching radius to determine the next waypoint
+search_radius = math.sqrt(3)*side+tolerance #tolerance=0 <=> minimum distance between the robot and the next available waypoints
+## initialization of the robot position
+position_list= [starting_position] #list of all the positions taken by the projected barycenter of the robot
+state_list = [([1,initial_angle],[3,initial_angle+120],[2,initial_angle+240])] #list of all the angles of the current face
+## initialization of the waypoints
+waypoints,x,y,center_x,center_y = waypoint.circle() ## USER DECIDES OF THE DESIRED PATH HERE
+current_waypoint, index_current_waypoint = search_funcs.search_next_waypoint(starting_position, 0, waypoints, search_radius)
 i = 0
-
 print(current_waypoint, index_current_waypoint)
+
+""" main """
+## main loop
 while i < 199: ######TEMPORAIRE
     k=0
-    while not search_funcs.point_dans_triangle(current_waypoint, liste_position[-1], a, liste_etat[-1])  :
-        angle = search_funcs.angle_waypoint(current_waypoint, liste_position[-1])
-        new_tuple, new_position = graph_transition.transition(liste_etat[-1], angle, liste_position[-1], math.sqrt(3) * a / 2)
-        liste_etat.append(new_tuple)
-        liste_position.append(new_position)
+    while not search_funcs.point_dans_triangle(current_waypoint, position_list[-1], side, state_list[-1])  :
+        angle = search_funcs.angle_waypoint(current_waypoint, position_list[-1])
+        new_tuple, new_position = graph_transition.transition(state_list[-1], angle, position_list[-1], math.sqrt(3) * side / 2)
+        state_list.append(new_tuple)
+        position_list.append(new_position)
         k+=1
         
        
     
     last_waypoint, index_last_waypoint = current_waypoint,index_current_waypoint
-    current_waypoint, index_current_waypoint = search_funcs.search_next_waypoint(liste_position[-1], index_current_waypoint, waypoints, search_radius)
+    current_waypoint, index_current_waypoint = search_funcs.search_next_waypoint(position_list[-1], index_current_waypoint, waypoints, search_radius)
     
     i = index_last_waypoint
 
-
-
-print('fini')
-triangles = [search_funcs.coord_triangle(liste_position[i], a, liste_etat[i]) for i in range(len(liste_etat))]
-# Tracé du cercle
+""" display """
+#triangles = [search_funcs.coord_triangle(position_list[i], side, state_list[i]) for i in range(len(state_list))] ## INUTIL?
+## Desired path plot
 plt.figure(figsize=(8, 8))
-plt.plot(x, y, label="Cercle (rayon=1000)")
-plt.scatter(waypoints[0],waypoints[1], color = "green", label = "Waypoint")
-plt.scatter([center_x], [center_y], color="red", label="Centre (-1000, 0)")
-plt.plot([i[0] for i in liste_position], [i[1] for i in liste_position],color="red", label="trajectoire barycentre" )
-for i in range(len(liste_etat)) :
+plt.plot(x, y, label="Desired path")
+plt.scatter(waypoints[0],waypoints[1], 5, color = "blue", marker="o", label = "Waypoint")
+## Planned path plot with starting and ending triangles
+for i in range(len(state_list)) :
     
-    pos_triangle = search_funcs.coord_triangle(liste_position[i], a, liste_etat[i])
+    pos_triangle = search_funcs.coord_triangle(position_list[i], side, state_list[i])
     if i ==0 :
-        plt.plot([pos_triangle[0][0],pos_triangle[1][0],pos_triangle[2][0],pos_triangle[0][0]],[pos_triangle[0][1],pos_triangle[1][1],pos_triangle[2][1],pos_triangle[0][1]],color ="purple")
-    elif i == len(liste_etat)-1 :
-        plt.plot([pos_triangle[0][0],pos_triangle[1][0],pos_triangle[2][0],pos_triangle[0][0]],[pos_triangle[0][1],pos_triangle[1][1],pos_triangle[2][1],pos_triangle[0][1]],color ="yellow")
+        plt.plot([pos_triangle[0][0],pos_triangle[1][0],pos_triangle[2][0],pos_triangle[0][0]],[pos_triangle[0][1],pos_triangle[1][1],pos_triangle[2][1],pos_triangle[0][1]],color ="green")
+    elif i == len(state_list)-1 :
+        plt.plot([pos_triangle[0][0],pos_triangle[1][0],pos_triangle[2][0],pos_triangle[0][0]],[pos_triangle[0][1],pos_triangle[1][1],pos_triangle[2][1],pos_triangle[0][1]],color ="red")
     else:
-        plt.plot([pos_triangle[0][0],pos_triangle[1][0],pos_triangle[2][0],pos_triangle[0][0]],[pos_triangle[0][1],pos_triangle[1][1],pos_triangle[2][1],pos_triangle[0][1]],color ="blue")
-# Configuration de la figure
-plt.axhline(0, color="black", linewidth=0.5, linestyle="--")  # Axe des abscisses
-plt.axvline(0, color="black", linewidth=0.5, linestyle="--")  # Axe des ordonnées
-plt.gca().set_aspect('equal', adjustable='box')  # Assure une échelle égale
-plt.xlim(-2100, 200)  # Limites sur l'axe x
-plt.ylim(-1200, 1200)  # Limites sur l'axe y
-plt.title("Cercle tangent à l'axe des ordonnées")
+        plt.plot([pos_triangle[0][0],pos_triangle[1][0],pos_triangle[2][0],pos_triangle[0][0]],[pos_triangle[0][1],pos_triangle[1][1],pos_triangle[2][1],pos_triangle[0][1]],color ="lightgray", linestyle='dotted')
+plt.plot([i[0] for i in position_list], [i[1] for i in position_list],color="red", label="Planned path")
+## Graph settings
+plt.axhline(0, color="black", linewidth=0.5, linestyle="--")  # x axis
+plt.axvline(0, color="black", linewidth=0.5, linestyle="--")  # y axis
+plt.gca().set_aspect('equal', adjustable='box')  # same scale on x and y
+plt.xlim(-2100, 200)  # x limits
+plt.ylim(-1200, 1200)  # y limits
+plt.title("Path planning of the Urchin Robot")
 plt.xlabel("X")
 plt.ylabel("Y")
 plt.legend()
 plt.grid(True)
-
-
-# Affichage
 plt.show()
