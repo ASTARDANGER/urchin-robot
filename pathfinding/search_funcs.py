@@ -71,7 +71,7 @@ def coord_triangle(barycentre, a, un_tuple):
     C_rot = rotation(C, angle_deg, barycentre) 
     return (A_rot,B_rot,C_rot)
 
-def point_dans_triangle(point, barycentre, a, un_tuple ):
+def point_in_triangle(point, barycentre, a, un_tuple ):
     """
     Vérifie si un point est dans un triangle équilatéral défini par son barycentre, 
     sa longueur de côté et son inclinaison (angle).
