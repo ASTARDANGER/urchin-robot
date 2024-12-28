@@ -43,23 +43,28 @@ def square(side=2000, N=1000):
     waypoints = (x[::5], y[::5])
     return waypoints, x, y, center_x, center_y
 
-def equilateral_triangle(side=2000, N=1000):
-    # Center of the square
+def pentagon(side=2000, N=1000):
+    # Center of the pentagon
     center_x = 0
     center_y = 0
-    # Waypoints generation
-    N_per_edge = N // 3  # Divide points equally among four edges
-    # Top edge (left to right)
-    x1 = np.linspace(-side/2, side/2, N_per_edge)
-    y1 = np.full_like(x_top, 3*sqrt(3)*side)
-    # Right edge (top to bottom)
-    x2 = np.linspace(side/2, -side/2, N_per_edge)
-    y2 = np.full_like(y_right, side/2)
-    # Bottom edge (right to left)
-    x3 = np.linspace(side/2, -side/2, N_per_edge)
-    y3 = np.full_like(x_bottom, -side/2)
-    # Combine edges in a continuous path
-    x = np.concatenate([x1, x2, x3]) + center_x
-    y = np.concatenate([y1, y2, y3]) + center_y
+    # Calculate the radius of the circumscribed circle
+    radius = side / (2 * np.sin(np.pi / 5))
+    # Angles of the vertices of the pentagon
+    angles = np.linspace(0, 2 * np.pi, 6)[:-1]  # 5 points, closing the shape by excluding the last point
+    # Vertices of the pentagon
+    x_vertices = center_x + radius * np.cos(angles + np.pi / 2)  # Rotate to align top vertex with y-axis
+    y_vertices = center_y + radius * np.sin(angles + np.pi / 2)
+    # Distribute points along the edges
+    points_per_edge = N // 5
+    x = []
+    y = []
+    for i in range(5):
+        x_edge = np.linspace(x_vertices[i], x_vertices[(i + 1) % 5], points_per_edge, endpoint=False)
+        y_edge = np.linspace(y_vertices[i], y_vertices[(i + 1) % 5], points_per_edge, endpoint=False)
+        x.append(x_edge)
+        y.append(y_edge)
+    # Combine the edges in a continuous path
+    x = np.concatenate(x)
+    y = np.concatenate(y)
     waypoints = (x[::5], y[::5])
     return waypoints, x, y, center_x, center_y

@@ -22,7 +22,7 @@ side = 100 #side size of the triangles
  
 """ initialization """
 ## recovery of the waypoints
-waypoints,x,y,center_x,center_y = waypoint.square() ## USER DECIDES OF THE DESIRED PATH HERE
+waypoints,x,y,center_x,center_y = waypoint.pentagon() ## USER DECIDES OF THE DESIRED PATH HERE
 ## initialization of the robot position
 starting_position = (waypoints[0][0],waypoints[1][0]) ## defined according to the first waypoint
 position_list = [starting_position] #list of all the positions taken by the projected barycenter of the robot
