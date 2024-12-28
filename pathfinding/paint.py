@@ -1,92 +1,75 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Dec 19 12:28:13 2024
-
-@author: robin
-"""
-
-import cv2
-import numpy as np
-
-from scipy.interpolate import splprep, splev
 import matplotlib.pyplot as plt
+import numpy as np
+from skimage import io, color, morphology
+from skimage.graph import route_through_array
 
-def extract_trajectory_from_image(image_path):
+def plot_trajectory_with_points(image_path, num_points):
     # Charger l'image
-    image = cv2.imread(image_path)
-    if image is None:
-        raise FileNotFoundError(f"Impossible de charger l'image : {image_path}")
-    
-    # Convertir en niveaux de gris
-    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    
-    # Appliquer un seuil pour binariser l'image
-    _, binary_image = cv2.threshold(gray_image, 127, 255, cv2.THRESH_BINARY_INV)
-    
-    # Trouver les contours du tracé
-    contours, _ = cv2.findContours(binary_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    
-    if len(contours) == 0:
-        raise ValueError("Aucun contour détecté. Assurez-vous que l'image contient un tracé visible.")
+    image = io.imread(image_path)
 
-    # Sélectionner le plus grand contour (au cas où il y en aurait plusieurs)
-    contour = max(contours, key=cv2.contourArea)
-    
-    # Extraire les points du contour
-    trajectory = [(point[0][0], point[0][1]) for point in contour]
-    
-    return trajectory
+    # Vérifier si l'image a une quatrième dimension (canal alpha)
+    if image.shape[-1] == 4:  # RGBA
+        image = image[:, :, :3]  # Garder uniquement les trois canaux RGB
 
-def generate_constant_step_points(trajectory, step_size=1.0):
-    """
-    Génère des points sur une trajectoire avec un pas constant.
+    # Identifier les pixels spécifiques
+    start_point = np.argwhere((image == [0, 255, 0]).all(axis=2))  # Vert (départ)
+    end_point = np.argwhere((image == [255, 0, 0]).all(axis=2))    # Rouge (arrivée)
 
-    :param trajectory: Liste de points (x, y) représentant la trajectoire.
-    :param step_size: Distance constante entre deux points consécutifs.
-    :return: Liste de nouveaux points (x, y) avec un pas constant.
-    """
-    # Extraire les coordonnées x et y
-    x, y = zip(*trajectory)
-    
-    # Créer une interpolation paramétrique avec splines
-    tck, u = splprep([x, y], s=0)  # 's=0' signifie que l'on suit exactement les points
-    unew = np.linspace(0, 1, num=1000)  # Augmenter la résolution pour précision
-    
-    # Générer des points interpolés
-    interpolated_points = np.array(splev(unew, tck))
-    
-    # Calculer les distances cumulées le long de la trajectoire
-    dx = np.diff(interpolated_points[0])
-    dy = np.diff(interpolated_points[1])
-    distances = np.sqrt(dx**2 + dy**2)
-    cumulative_distances = np.hstack(([0], np.cumsum(distances)))
-    
-    # Générer les nouveaux points avec un pas constant
-    total_length = cumulative_distances[-1]
-    new_distances = np.arange(0, total_length, step_size)
-    new_points = np.array(splev(new_distances / total_length, tck)).T
+    if len(start_point) == 0 or len(end_point) == 0:
+        raise ValueError("Points de départ ou d'arrivée introuvables dans l'image")
 
-    return new_points
+    start_point = start_point[0]  # Supposons un seul pixel vert
+    end_point = end_point[0]      # Supposons un seul pixel rouge
 
-def main():
-    image_path = "trace.png"  # Chemin vers l'image Paint contenant le tracé
+    print(f"Start point: {start_point}, End point: {end_point}")
+
+    # Identifier les pixels de la trajectoire (noirs)
+    image_gray = color.rgb2gray(image) if image.ndim == 3 else image
+    path_mask = image_gray < 0.1  # Seuil pour les pixels noirs
+
+    if not np.any(path_mask):
+        raise ValueError("Aucun pixel noir trouvé pour la trajectoire")
+
+    # Appliquer une dilatation pour connecter les pixels isolés
+    path_mask = morphology.dilation(path_mask, morphology.square(3))
+
+    # Créer une matrice de coût (inverse des valeurs du masque)
+    cost_array = np.where(path_mask, 1, np.inf)
+
+    # Trouver le chemin optimal entre le départ et l'arrivée
     try:
-        trajectory = extract_trajectory_from_image(image_path)
-        new_trajectory = generate_constant_step_points(trajectory, step_size=1.0)
-        print("Trajectoire interpolé extraite :")
-        print(new_trajectory)
-        
-        # Visualiser la trajectoire (facultatif)
-        image = cv2.imread(image_path)
-        for point in new_trajectory:
-            # Convertir le point en tuple d'entiers
-            center = tuple(int(coord) for coord in point)
-            cv2.circle(image, center, 1, (0, 0, 255), -1)
-        cv2.imshow("Trajectoire", image)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-    except Exception as e:
-        print(f"Erreur : {e}")
+        indices, _ = route_through_array(cost_array, tuple(start_point), tuple(end_point), fully_connected=True)
+    except ValueError as e:
+        raise ValueError("Impossible de trouver un chemin entre les points") from e
 
-if __name__ == "__main__":
-    main()
+    trajectory = np.array(indices)
+
+    # Répartir N points équidistants le long de la trajectoire
+    distances = np.cumsum(np.sqrt(np.sum(np.diff(trajectory, axis=0)**2, axis=1)))
+    distances = np.insert(distances, 0, 0)
+    target_distances = np.linspace(0, distances[-1], num_points)
+    sampled_points = trajectory[np.searchsorted(distances, target_distances)]
+
+    # Préparer l'affichage
+    plt.figure(figsize=(10, 10))
+
+    # Afficher l'image d'origine
+    plt.imshow(image, origin='upper')
+
+    # Tracer la trajectoire détectée
+    plt.plot(trajectory[:, 1], trajectory[:, 0], color='blue', label="Trajectoire détectée")
+
+    # Ajouter les points
+    plt.scatter(start_point[1], start_point[0], color='green', label="Départ", s=100)
+    plt.scatter(end_point[1], end_point[0], color='red', label="Arrivée", s=100)
+    plt.scatter(sampled_points[:, 1], sampled_points[:, 0], color='yellow', label="Points échantillonnés", s=50)
+    print(len(sampled_points))
+    plt.legend()
+    plt.axis('off')
+    plt.title("Trajectoire détectée avec points de départ et d'arrivée")
+    plt.show()
+
+# Exemple d'utilisation
+image_path = "path.png"
+num_points = 1000
+plot_trajectory_with_points(image_path, num_points)
