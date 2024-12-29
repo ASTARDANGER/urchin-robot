@@ -1,28 +1,20 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Dec 18 16:44:09 2024
 
-@author: robin
-"""
 import matplotlib.pyplot as plt
-import matplotlib.colors as mplcolors
-import waypoint
+import trajectory_generator
 import graph_transition
 import search_funcs
 import math
-import numpy as np
-
-
-
+from gradient_color_generator import colorFader
 
 """ parameters """
 search_radius = 0 # how far we search for the next waypoint (impact the quality of trajectory's approximation)
 initial_angle = 0 #en degrees
-side = 100 #side size of the triangles
+side = 10 #side size of the triangles
  
 """ initialization """
 ## recovery of the waypoints
-waypoints,x,y,center_x,center_y = waypoint.pentagon() ## USER DECIDES OF THE DESIRED PATH HERE
+waypoints,x,y = trajectory_generator.pathFromImg("path.png") ## USER DECIDES OF THE DESIRED PATH HERE
 ## initialization of the robot position
 starting_position = (waypoints[0][0],waypoints[1][0]) ## defined according to the first waypoint
 position_list = [starting_position] #list of all the positions taken by the projected barycenter of the robot
@@ -34,7 +26,7 @@ print(current_waypoint, index_current_waypoint)
 
 """ main """
 ## main loop
-while i < 199: ######TEMPORAIRE
+while i < (len(waypoints[0]) - 1): ######TEMPORAIRE
     k=0
     while not search_funcs.point_in_triangle(current_waypoint, position_list[-1], side, state_list[-1])  :
         angle = search_funcs.angle_waypoint(current_waypoint, position_list[-1])
@@ -42,25 +34,20 @@ while i < 199: ######TEMPORAIRE
         state_list.append(new_tuple)
         position_list.append(new_position)
         k+=1
-        
-       
-    
     last_waypoint, index_last_waypoint = current_waypoint,index_current_waypoint
     current_waypoint, index_current_waypoint = search_funcs.search_next_waypoint(position_list[-1], index_current_waypoint, waypoints, search_radius)
     
     i = index_last_waypoint
 
 """ display """
-## to plot with a gradient of color
-def colorFader(c1="green",c2="red",mix=0): #fade (linear interpolate) from color c1 (at mix=0) to c2 (mix=1)
-    c1=np.array(mplcolors.to_rgb(c1))
-    c2=np.array(mplcolors.to_rgb(c2))
-    return mplcolors.to_hex((1-mix)*c1 + mix*c2)
+
 #triangles = [search_funcs.coord_triangle(position_list[i], side, state_list[i]) for i in range(len(state_list))] ## INUTIL?
 ## Desired path plot
 plt.figure(figsize=(8, 8))
 plt.plot(x, y, label="Desired path")
 plt.scatter(waypoints[0],waypoints[1], 5, color = "blue", marker="o", label = "Waypoint")
+plt.scatter(waypoints[0][0],waypoints[1][0], 20, color = "green", marker="o", label = "Start")
+plt.scatter(waypoints[0][-1],waypoints[1][-1], 20, color = "red", marker="o", label = "End")
 ## Planned path plot with starting and ending triangles
 for i in range(len(state_list)) :
     pos_triangle = search_funcs.coord_triangle(position_list[i], side, state_list[i])

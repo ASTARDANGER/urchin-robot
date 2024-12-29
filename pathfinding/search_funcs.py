@@ -1,16 +1,11 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Dec 18 12:04:52 2024
 
-@author: robin
-"""
-
-import waypoint
+import trajectory_generator
 import graph_transition
 import math
 
 #r = 300 #reasearch radius to find the next waypoint
-#waypoints = waypoint.waypoints_circle()
+#waypoints = trajectory_generator.circle()
 #position = [0,0]
 taille_cote= 150
 
