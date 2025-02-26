@@ -51,8 +51,6 @@
         <dynamics>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
-          <damping>5</damping>
-          <friction>0.5</friction>
         </dynamics>
       </axis>
     </joint>
@@ -108,8 +106,6 @@
         <dynamics>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
-          <damping>5</damping>
-          <friction>5</friction>
         </dynamics>
       </axis>
     </joint>
@@ -165,8 +161,6 @@
         <dynamics>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
-          <damping>5</damping>
-          <friction>5</friction>
         </dynamics>
       </axis>
     </joint>
@@ -222,8 +216,6 @@
         <dynamics>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
-          <damping>5</damping>
-          <friction>5</friction>
         </dynamics>
       </axis>
     </joint>
@@ -279,8 +271,6 @@
         <dynamics>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
-          <damping>5</damping>
-          <friction>5</friction>
         </dynamics>
       </axis>
     </joint>
@@ -336,8 +326,6 @@
         <dynamics>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
-          <damping>5</damping>
-          <friction>5</friction>
         </dynamics>
       </axis>
     </joint>
@@ -393,8 +381,6 @@
         <dynamics>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
-          <damping>5</damping>
-          <friction>5</friction>
         </dynamics>
       </axis>
     </joint>
@@ -450,8 +436,6 @@
         <dynamics>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
-          <damping>5</damping>
-          <friction>5</friction>
         </dynamics>
       </axis>
     </joint>
@@ -507,8 +491,6 @@
         <dynamics>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
-          <damping>5</damping>
-          <friction>5</friction>
         </dynamics>
       </axis>
     </joint>
@@ -564,8 +546,6 @@
         <dynamics>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
-          <damping>5</damping>
-          <friction>5</friction>
         </dynamics>
       </axis>
     </joint>
@@ -621,8 +601,6 @@
         <dynamics>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
-          <damping>5</damping>
-          <friction>5</friction>
         </dynamics>
       </axis>
     </joint>
@@ -678,8 +656,6 @@
         <dynamics>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
-          <damping>5</damping>
-          <friction>5</friction>
         </dynamics>
       </axis>
     </joint>
@@ -722,18 +698,3 @@
     </link>
   </model>
 </sdf>
-<plugin filename="libgz-gui-joint-slider-system.so" name="joint_sliders">
-  <joint>part_1</joint>
-  <joint>part_1_2</joint>
-  <joint>part_1_3</joint>
-  <joint>part_1_4</joint>
-  <joint>part_1_5</joint>
-  <joint>part_1_6</joint>
-  <joint>part_1_7</joint>
-  <joint>part_1_8</joint>
-  <joint>part_1_9</joint>
-  <joint>part_1_10</joint>
-  <joint>part_1_11</joint>
-  <joint>part_1_12</joint>
-</plugin>
-

@@ -16,6 +16,12 @@ install(
   DESTINATION share/${PROJECT_NAME}
 )
 
+# Install world files
+install(
+  DIRECTORY world
+  DESTINATION share/${PROJECT_NAME}
+)
+
 # Install RViz files (if necessary)
 install(
   DIRECTORY rviz
