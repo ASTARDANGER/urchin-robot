@@ -22,12 +22,6 @@ install(
   DESTINATION share/${PROJECT_NAME}
 )
 
-# Install RViz files (if necessary)
-install(
-  DIRECTORY rviz
-  DESTINATION share/${PROJECT_NAME}
-)
-
 # Install launch files
 install(
   DIRECTORY launch

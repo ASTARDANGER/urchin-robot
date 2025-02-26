@@ -4,6 +4,7 @@ from launch import LaunchDescription
 from launch_ros.actions import Node
 
 def generate_launch_description():
+    world_file = os.path.join(get_package_share_directory('urchin_robot'), 'world', 'world.world')
     urdf_file = os.path.join(get_package_share_directory('urchin_robot'), 'urdf', 'robot.urdf')
 
     return LaunchDescription([
