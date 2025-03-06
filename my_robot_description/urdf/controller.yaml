@@ -1,0 +1,60 @@
+controller_manager:
+  ros__parameters:
+    # Controllers definition
+    joint_state_controller:
+      type: "joint_state_controller/JointStateController"
+      publish_rate: 50  # Hz
+
+    joint_position_controller:
+      type: "effort_controllers/JointPositionController"
+      joint: "leg1"
+      pid: {p: 100.0, i: 0.1, d: 0.01, i_max: 0.1}
+    joint_position_controller:
+      type: "effort_controllers/JointPositionController"
+      joint: "leg2"
+      pid: {p: 100.0, i: 0.1, d: 0.01, i_max: 0.1}
+    joint_position_controller:
+      type: "effort_controllers/JointPositionController"
+      joint: "leg3"
+      pid: {p: 100.0, i: 0.1, d: 0.01, i_max: 0.1}
+    joint_position_controller:
+      type: "effort_controllers/JointPositionController"
+      joint: "leg4"
+      pid: {p: 100.0, i: 0.1, d: 0.01, i_max: 0.1}
+    joint_position_controller:
+      type: "effort_controllers/JointPositionController"
+      joint: "leg5"
+      pid: {p: 100.0, i: 0.1, d: 0.01, i_max: 0.1}
+    joint_position_controller:
+      type: "effort_controllers/JointPositionController"
+      joint: "leg6"
+      pid: {p: 100.0, i: 0.1, d: 0.01, i_max: 0.1}
+    joint_position_controller:
+      type: "effort_controllers/JointPositionController"
+      joint: "leg7"
+      pid: {p: 100.0, i: 0.1, d: 0.01, i_max: 0.1}
+    joint_position_controller:
+      type: "effort_controllers/JointPositionController"
+      joint: "leg8"
+      pid: {p: 100.0, i: 0.1, d: 0.01, i_max: 0.1}
+    joint_position_controller:
+      type: "effort_controllers/JointPositionController"
+      joint: "leg9"
+      pid: {p: 100.0, i: 0.1, d: 0.01, i_max: 0.1}
+    joint_position_controller:
+      type: "effort_controllers/JointPositionController"
+      joint: "leg10"
+      pid: {p: 100.0, i: 0.1, d: 0.01, i_max: 0.1}
+    joint_position_controller:
+      type: "effort_controllers/JointPositionController"
+      joint: "leg11"
+      pid: {p: 100.0, i: 0.1, d: 0.01, i_max: 0.1}
+    joint_position_controller:
+      type: "effort_controllers/JointPositionController"
+      joint: "leg12"
+      pid: {p: 100.0, i: 0.1, d: 0.01, i_max: 0.1}
+
+
+    # Hardware interface (make sure this matches your URDF/hardware setup)
+    hardware_interface:
+      type: "hardware_interface/RobotHardware"
