@@ -3,7 +3,7 @@
 <visual>
 <origin xyz="0.070678574689464312986 -0.094010539903862488931 0.15232774369985618845" rpy="-2.2757746540218444231 -0.80896846272084954599 0.69616562304406370831" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/base.stl"/>
+<mesh filename="package://my_robot_description/meshes/base.stl"/>
 </geometry>
 <material name="base_material">
 <color rgba="0.71764705882352941568 0.71764705882352941568 0.71764705882352941568 1.0"/>
@@ -12,7 +12,7 @@
 <collision>
 <origin xyz="0.070678574689464312986 -0.094010539903862488931 0.15232774369985618845" rpy="-2.2757746540218444231 -0.80896846272084954599 0.69616562304406370831" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/base.stl"/>
+<mesh filename="package://my_robot_description/meshes/base.stl"/>
 </geometry>
 </collision>
 <inertial>
@@ -37,7 +37,7 @@
 <visual>
 <origin xyz="6.9388939039072283776e-18 0 -0.047999999999999987121" rpy="2.6104898781181265598e-17 2.2035375562283580117e-17 -1.3507799912942693964e-17" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 <material name="part_1_material">
 <color rgba="0.32549019607843138191 0.52941176470588235947 0.75294117647058822484 1.0"/>
@@ -46,7 +46,7 @@
 <collision>
 <origin xyz="6.9388939039072283776e-18 0 -0.047999999999999987121" rpy="2.6104898781181265598e-17 2.2035375562283580117e-17 -1.3507799912942693964e-17" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 </collision>
 <inertial>
@@ -69,7 +69,7 @@
 <visual>
 <origin xyz="-4.1633363423443370266e-17 0 -0.047999999999999987121" rpy="7.3347634954558905603e-18 -1.0240992284846675533e-17 -2.2240244855271126446e-17" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 <material name="part_1_material">
 <color rgba="0.32549019607843138191 0.52941176470588235947 0.75294117647058822484 1.0"/>
@@ -78,7 +78,7 @@
 <collision>
 <origin xyz="-4.1633363423443370266e-17 0 -0.047999999999999987121" rpy="7.3347634954558905603e-18 -1.0240992284846675533e-17 -2.2240244855271126446e-17" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 </collision>
 <inertial>
@@ -101,7 +101,7 @@
 <visual>
 <origin xyz="2.7755575615628913511e-17 -2.7755575615628913511e-17 -0.047999999999999987121" rpy="-1.1568393606084544768e-16 -3.4110663803636827147e-17 6.4135666057136817469e-17" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 <material name="part_1_material">
 <color rgba="0.32549019607843138191 0.52941176470588235947 0.75294117647058822484 1.0"/>
@@ -110,7 +110,7 @@
 <collision>
 <origin xyz="2.7755575615628913511e-17 -2.7755575615628913511e-17 -0.047999999999999987121" rpy="-1.1568393606084544768e-16 -3.4110663803636827147e-17 6.4135666057136817469e-17" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 </collision>
 <inertial>
@@ -133,7 +133,7 @@
 <visual>
 <origin xyz="0 0 -0.047999999999999987121" rpy="-2.7079008875253532336e-17 6.9869758018487935039e-17 9.2120863166359433376e-17" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 <material name="part_1_material">
 <color rgba="0.32549019607843138191 0.52941176470588235947 0.75294117647058822484 1.0"/>
@@ -142,7 +142,7 @@
 <collision>
 <origin xyz="0 0 -0.047999999999999987121" rpy="-2.7079008875253532336e-17 6.9869758018487935039e-17 9.2120863166359433376e-17" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 </collision>
 <inertial>
@@ -165,7 +165,7 @@
 <visual>
 <origin xyz="5.5511151231257827021e-17 -1.3877787807814456755e-17 -0.047999999999999987121" rpy="3.4746088843986403618e-17 -6.5383606489533330299e-18 2.1465904006134389142e-17" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 <material name="part_1_material">
 <color rgba="0.32549019607843138191 0.52941176470588235947 0.75294117647058822484 1.0"/>
@@ -174,7 +174,7 @@
 <collision>
 <origin xyz="5.5511151231257827021e-17 -1.3877787807814456755e-17 -0.047999999999999987121" rpy="3.4746088843986403618e-17 -6.5383606489533330299e-18 2.1465904006134389142e-17" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 </collision>
 <inertial>
@@ -197,7 +197,7 @@
 <visual>
 <origin xyz="0 0 -2.7755575615628913511e-17" rpy="-3.141592653589793116 -4.851736429199485133e-17 -1.1229146796635854684e-16" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 <material name="part_1_material">
 <color rgba="0.32549019607843138191 0.52941176470588235947 0.75294117647058822484 1.0"/>
@@ -206,7 +206,7 @@
 <collision>
 <origin xyz="0 0 -2.7755575615628913511e-17" rpy="-3.141592653589793116 -4.851736429199485133e-17 -1.1229146796635854684e-16" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 </collision>
 <inertial>
@@ -229,7 +229,7 @@
 <visual>
 <origin xyz="0 2.7755575615628913511e-17 -0.047999999999999987121" rpy="3.3606429572465610549e-18 1.7463037188443073652e-17 -8.4215491670696958503e-17" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 <material name="part_1_material">
 <color rgba="0.32549019607843138191 0.52941176470588235947 0.75294117647058822484 1.0"/>
@@ -238,7 +238,7 @@
 <collision>
 <origin xyz="0 2.7755575615628913511e-17 -0.047999999999999987121" rpy="3.3606429572465610549e-18 1.7463037188443073652e-17 -8.4215491670696958503e-17" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 </collision>
 <inertial>
@@ -261,7 +261,7 @@
 <visual>
 <origin xyz="-3.4694469519536141888e-17 0 -0.048000000000000000999" rpy="5.0570356502760449864e-17 -4.7961025865832585313e-17 6.8918852154617291672e-18" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 <material name="part_1_material">
 <color rgba="0.32549019607843138191 0.52941176470588235947 0.75294117647058822484 1.0"/>
@@ -270,7 +270,7 @@
 <collision>
 <origin xyz="-3.4694469519536141888e-17 0 -0.048000000000000000999" rpy="5.0570356502760449864e-17 -4.7961025865832585313e-17 6.8918852154617291672e-18" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 </collision>
 <inertial>
@@ -293,7 +293,7 @@
 <visual>
 <origin xyz="0 -1.3877787807814456755e-17 -0.048000000000000014877" rpy="-1.1788907973684903958e-16 -4.8401651329963865406e-18 5.4335176694030832376e-17" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 <material name="part_1_material">
 <color rgba="0.32549019607843138191 0.52941176470588235947 0.75294117647058822484 1.0"/>
@@ -302,7 +302,7 @@
 <collision>
 <origin xyz="0 -1.3877787807814456755e-17 -0.048000000000000014877" rpy="-1.1788907973684903958e-16 -4.8401651329963865406e-18 5.4335176694030832376e-17" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 </collision>
 <inertial>
@@ -325,7 +325,7 @@
 <visual>
 <origin xyz="-5.5511151231257827021e-17 -6.9388939039072283776e-18 -0.048000000000000014877" rpy="-2.8858389638427886649e-17 -1.1155600016765979157e-17 -9.2709037217458984792e-17" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 <material name="part_1_material">
 <color rgba="0.32549019607843138191 0.52941176470588235947 0.75294117647058822484 1.0"/>
@@ -334,7 +334,7 @@
 <collision>
 <origin xyz="-5.5511151231257827021e-17 -6.9388939039072283776e-18 -0.048000000000000014877" rpy="-2.8858389638427886649e-17 -1.1155600016765979157e-17 -9.2709037217458984792e-17" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 </collision>
 <inertial>
@@ -357,7 +357,7 @@
 <visual>
 <origin xyz="0 0 -1.3877787807814456755e-17" rpy="3.141592653589793116 -4.4268701547136516849e-19 -1.2130233426354671654e-17" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 <material name="part_1_material">
 <color rgba="0.32549019607843138191 0.52941176470588235947 0.75294117647058822484 1.0"/>
@@ -366,7 +366,7 @@
 <collision>
 <origin xyz="0 0 -1.3877787807814456755e-17" rpy="3.141592653589793116 -4.4268701547136516849e-19 -1.2130233426354671654e-17" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 </collision>
 <inertial>
@@ -389,7 +389,7 @@
 <visual>
 <origin xyz="-1.3877787807814456755e-17 0 -3.4694469519536141888e-18" rpy="-3.141592653589793116 2.1787460762826960852e-17 1.0164552874573241184e-17" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 <material name="part_1_material">
 <color rgba="0.32549019607843138191 0.52941176470588235947 0.75294117647058822484 1.0"/>
@@ -398,7 +398,7 @@
 <collision>
 <origin xyz="-1.3877787807814456755e-17 0 -3.4694469519536141888e-18" rpy="-3.141592653589793116 2.1787460762826960852e-17 1.0164552874573241184e-17" />
 <geometry>
-<mesh filename="/home/bjouvelot/ros2_ws/src/my_robot_description/meshes/part_1.stl"/>
+<mesh filename="package://my_robot_description/meshes/part_1.stl"/>
 </geometry>
 </collision>
 <inertial>
@@ -419,7 +419,7 @@
 
 
 <!-- ROS2 Control configuration -->
-
+<!--
 <ros2_control>
   <hardware>
     <plugin>gz_ros2_control/GazeboSimSystem</plugin>
@@ -437,6 +437,6 @@
     <joint name="leg12" interface="position" />
   </hardware>
 </ros2_control>
-
+-->
 
 </robot>

@@ -28,7 +28,7 @@ def generate_launch_description():
         Node(
             package='rviz2',
             executable='rviz2',
-            arguments=['-d', os.path.join(get_package_share_directory('my_robot_description'), 'urdf', 'config.rviz')]
+            #arguments=['-d', os.path.join(get_package_share_directory('my_robot_description'), 'urdf', 'config.rviz')]
         )
     ])
 
