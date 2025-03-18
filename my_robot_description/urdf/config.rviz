@@ -1,0 +1,7 @@
+Visualization Manager:
+  Global Options:
+    Fixed Frame: dummy_link
+  Displays:
+    - Name: RobotModel
+      Type: robot_model
+      Description Topic: /robot_description
